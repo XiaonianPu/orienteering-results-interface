@@ -11,7 +11,7 @@
 ## 预计功能
 
 - 成绩打印（支持任意有线/无线串口打印机）
-- *[TODO]* 用户界面 - 请催偶溶解赶紧做 @WaterFishJ
+- *[TODO]* 用户界面 - 请催偶溶解赶紧做 [@WaterFishJ](https://github.com/WaterFishJ)
 - *[TODO*] 有效性解析
 - *[TODO]* 分段计时数据分析
 - *[TODO]* 成绩数据分析及其导出
