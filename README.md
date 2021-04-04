@@ -11,12 +11,21 @@
 ## 预计功能
 
 - 成绩打印（支持任意有线/无线串口打印机）
+
 - *[TODO]* 用户界面 - 请催偶溶解赶紧做 [@WaterFishJ](https://github.com/WaterFishJ)
+
+  <img src="GUI/pics/image-20210405012249330.png" alt="image-20210405012249330" style="zoom:50%;" />
+
 - *[TODO*] 有效性解析
+
 - *[TODO]* 分段计时数据分析
+
 - *[TODO]* 成绩数据分析及其导出
+
 - *[TODO]* 实时成绩网络预览
+
 - *[TODO]* 接入微信公众号，实现成绩推送
+
 - *[TODO]* 接入微信小程序，实现无PC成绩统计
 
 ## 联系方式
