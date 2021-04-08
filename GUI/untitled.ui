@@ -191,7 +191,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>卡信息</string>
+       <string>卡数据</string>
       </property>
       <widget class="QLabel" name="label_3">
        <property name="geometry">

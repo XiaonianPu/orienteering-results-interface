@@ -227,7 +227,7 @@ class Ui_MainWindow(object):
         self.groupBox_5.setTitle(_translate("MainWindow", "打印机状态"))
         self.checkBox.setText(_translate("MainWindow", "开启打印"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "连接设备"))
-        self.groupBox_2.setTitle(_translate("MainWindow", "卡信息"))
+        self.groupBox_2.setTitle(_translate("MainWindow", "卡数据"))
         self.label_3.setText(_translate("MainWindow", "卡号："))
         self.label_4.setText(_translate("MainWindow", "出发时间："))
         self.label_17.setText(_translate("MainWindow", "10:13:14"))
