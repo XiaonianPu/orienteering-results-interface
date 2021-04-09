@@ -1,5 +1,5 @@
-from Common.Result import Result
-from ResultStatistic.Interface.PunchMeta import PunchMeta
+from Basic.Common.Result import Result
+from Basic.ResultStatistic.Interface.PunchMeta import PunchMeta
 
 
 # 检查所有路线，具备自动匹配能力

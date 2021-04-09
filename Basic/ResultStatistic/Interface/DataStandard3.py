@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as ET
-from Common.Control import Control
-from Common.Course import Course
-from Common.Result import Result
+from Basic.Common.Control import Control
+from Basic.Common.Course import Course
 
 NAMESPACE = {"iof": "http://www.orienteering.org/datastandard/3.0"}
 

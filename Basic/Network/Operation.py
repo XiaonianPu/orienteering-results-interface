@@ -1,4 +1,4 @@
-from Network.Database import Database
+from Basic.Network.Database import Database
 
 
 class Event:

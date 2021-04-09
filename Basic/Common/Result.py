@@ -1,6 +1,4 @@
-from datetime import time
-
-from ResultStatistic.Interface.PunchMeta import PunchMeta
+from Basic.ResultStatistic.Interface.PunchMeta import PunchMeta
 
 
 class Result:

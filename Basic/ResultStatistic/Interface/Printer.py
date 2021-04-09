@@ -1,6 +1,6 @@
-from datetime import time, timedelta, datetime
+from datetime import datetime
 
-from Common.Result import Result
+from Basic.Common.Result import Result
 
 END_OF_LINE = "\r\n"
 
