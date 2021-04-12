@@ -26,7 +26,7 @@ def get_delta_time(current: time, previous: time) -> time:
     c_delta = timedelta(hours=current.hour, minutes=current.minute, seconds=current.second)
     p_delta = timedelta(hours=previous.hour, minutes=previous.minute, seconds=previous.second)
     delta = c_delta - p_delta
-    return time.fromisoformat(str(delta))
+    return time.fromisoformat(str(delta).rjust(8,'0'))
 
 
 class PunchMeta:
@@ -37,6 +37,7 @@ class PunchMeta:
         self.start_time = None
         self.clear_time = None
         self.finish_time = None
+        self.last_to_finish = None
         self.hex_string = None
         self.station_no = None
         self.result_block_list = []
@@ -57,6 +58,7 @@ class PunchMeta:
 
         self.start_time = time_str_to_time(self.result_block_list[1][START_POS + OPERATION_LENGTH:FINISH_POS])
         self.finish_time = time_str_to_time(self.result_block_list[1][FINISH_POS + OPERATION_LENGTH:CLEAR_POS])
+
         punch_block_list = self.result_block_list[2:-1]
         previous_punch_time = self.start_time
         for punch_block in punch_block_list:
@@ -75,4 +77,6 @@ class PunchMeta:
                 previous_punch_time = punch_time
                 #  累积时间是与起点的时间差
                 cumulate_time = get_delta_time(punch_time, self.start_time)
+                self.last_to_finish = get_delta_time(self.finish_time, punch_time)
                 self.punch_list.append((punch_id, cumulate_time, delta_time))
+

@@ -9,20 +9,26 @@ import ResultStatistic.Validation.Individual as Individual
 
 
 class SerialThread(threading.Thread):
-    def __init__(self, course_xml_path, station_com_num, printer_com_num=None):
+    def __init__(self, station_com_num, printer_com_num=None, course_data=None):
         threading.Thread.__init__(self)
-        self.course_xml_path = course_xml_path
-        self.course_data = DS3(course_xml_path)
+        self.course_data = course_data
         self.station_com_num = station_com_num
         self.printer_com_num = printer_com_num
-
-        self.station = serial.Serial(station_com_num, timeout=0.5)
-        self.printer = serial.Serial(printer_com_num, timeout=0.5)
+        try:
+            self.station = serial.Serial(station_com_num, timeout=0.5)
+        except OSError:
+            print("主站端口打开失败")
+            self.station = None
+        try:
+            self.printer = serial.Serial(printer_com_num, timeout=0.5)
+        except OSError:
+            print("打印机端口打开失败")
+            self.printer = None
 
     def run(self) -> None:
         while True:
             time.sleep(0.5)
-            if self.station.inWaiting() > 0:
+            if self.station is not None and self.station.inWaiting() > 0:
                 time.sleep(0.5)
                 _data = self.station.read_all()
                 punch_meta = PunchMeta(_data)
@@ -30,4 +36,7 @@ class SerialThread(threading.Thread):
                 res_str = pt.print_result(result)
                 if self.printer_com_num is not None:
                     _bytes = pt.to_bytes(res_str)
-                    self.printer.write(_bytes)
+                    try:
+                        self.printer.write(_bytes)
+                    except Exception:
+                        print("Exception occurred")

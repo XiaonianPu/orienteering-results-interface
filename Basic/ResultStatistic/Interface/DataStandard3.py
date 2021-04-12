@@ -2,12 +2,12 @@ import xml.etree.ElementTree as ET
 from Basic.Common.Control import Control
 from Basic.Common.Course import Course
 
-NAMESPACE = {"iof": "http://www.orienteering.org/datastandard/3.0"}
-
 
 class DS3:
 
     def __init__(self, xml_path) -> None:
+        self.event_id = None
+        self.competition_id = None
         self.path = xml_path
         self.et = ET.parse(self.path)
         self.root_node = self.et.getroot()
@@ -25,7 +25,10 @@ class DS3:
     def parse_control(self):
         for control in self.control_xml_list:
             self.control_list.append(Control(control))
+            pass
 
+    def upload(self,competition_id, event_id=None):
+        pass
 
 
 

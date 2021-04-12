@@ -10,20 +10,25 @@ def validate(course_list, punch_meta: PunchMeta) -> Result:
     for course in course_list:
         # 正确的punch列表
         correct_punch_list = []
+        all_punch_list = []
         # 对于打错的点，本质上是去掉其记录
         i = 0
         for order, control in enumerate(course.control_list):
             for punch in result.punch_list[i:]:
-                if punch == control:
+                if punch[0] == control:
                     # 存储正确的检查点编号及其检查点顺序
-                    correct_punch_list.append((order, punch))
+                    all_punch_list.append((order, punch[0], punch[1], punch[2]))
+                    correct_punch_list.append((order, punch[0], punch[1], punch[2]))
                     i += 1
                     break
+                else:
+                    all_punch_list.append(('--', punch[0], punch[1], punch[2]))
         # 出现完全匹配, 也就是有效
         if len(correct_punch_list) == len(course.control_list):
             result.course_match_confidence = 1.0
-            result.course_name = course.name
+            result.course_name = course.course_title
             result.correct_punch_list = correct_punch_list
+            result.all_punch_list = all_punch_list
             result.is_valid = True
             # 有效就不用再判断了
             break
@@ -33,8 +38,9 @@ def validate(course_list, punch_meta: PunchMeta) -> Result:
             # 大于的话就认为是了
             if percentage > result.course_match_confidence:
                 result.course_match_confidence = percentage
-                result.course_name = course.name
+                result.course_name = course.course_title
                 result.correct_punch_list = correct_punch_list
+                result.all_punch_list = all_punch_list
                 result.is_valid = False
             else:
                 pass
