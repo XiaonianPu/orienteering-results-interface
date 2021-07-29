@@ -1,4 +1,4 @@
-from Basic.Common.Result import Result
+from Struct.OEvent.Result import Result
 from Basic.ResultStatistic.Interface.PunchMeta import PunchMeta
 
 
@@ -7,28 +7,29 @@ def validate(course_list, punch_meta: PunchMeta) -> Result:
     # 从指卡元数据生成成绩信息
     result = Result(punch_meta)
     # 遍历路线. 外层循环跳出条件: 有一个完全匹配的路线
+    all_punch_list = []
+    for order, punch in enumerate(result.punch_list):
+        all_punch_list.append((order+1, punch["punch_id"], punch["cumulate_time"], punch["delta_time"]))
+    result.all_punch_list = all_punch_list
     for course in course_list:
         # 正确的punch列表
         correct_punch_list = []
-        all_punch_list = []
         # 对于打错的点，本质上是去掉其记录
         i = 0
-        for order, control in enumerate(course.control_list):
-            for punch in result.punch_list[i:]:
-                if punch[0] == control:
-                    # 存储正确的检查点编号及其检查点顺序
-                    all_punch_list.append((order, punch[0], punch[1], punch[2]))
-                    correct_punch_list.append((order, punch[0], punch[1], punch[2]))
-                    i += 1
-                    break
-                else:
-                    all_punch_list.append(('--', punch[0], punch[1], punch[2]))
+        # for order, control in enumerate(course.control_list):
+        for order, punch in enumerate(result.punch_list):
+            control = course.control_list[i]
+            if punch["punch_id"] == control:
+                # 存储正确的检查点编号及其检查点顺序
+                correct_punch_list.append((order+1, punch["punch_id"], punch["cumulate_time"], punch["delta_time"]))
+                i += 1
+            if i == len(course.control_list):
+                break
         # 出现完全匹配, 也就是有效
         if len(correct_punch_list) == len(course.control_list):
             result.course_match_confidence = 1.0
             result.course_name = course.course_title
             result.correct_punch_list = correct_punch_list
-            result.all_punch_list = all_punch_list
             result.is_valid = True
             # 有效就不用再判断了
             break
@@ -40,7 +41,6 @@ def validate(course_list, punch_meta: PunchMeta) -> Result:
                 result.course_match_confidence = percentage
                 result.course_name = course.course_title
                 result.correct_punch_list = correct_punch_list
-                result.all_punch_list = all_punch_list
                 result.is_valid = False
             else:
                 pass

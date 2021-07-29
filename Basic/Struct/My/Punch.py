@@ -1,6 +1,7 @@
 import datetime
 import time
 from Basic.ResultStatistic.Interface.PunchMeta import PunchMeta
+from Network import Database
 
 
 class Punch:
@@ -15,4 +16,13 @@ class Punch:
         self.type = "NORMAL"
         self.is_mp = False
         self.time_delta = delta
+
+    def create(self):
+        db, cursor = Database.connect()
+        sql = "insert into tb_event values(%s,%s,%s,%s)"
+        res = cursor.execute(sql, (self.pk_event_id, self.event_name, self.event_date, self.event_location))
+        Database.DB.commit()
+        Database.close(cursor)
+        if res == 0:
+            raise Exception("Create fail")
 

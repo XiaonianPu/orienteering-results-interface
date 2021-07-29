@@ -23,7 +23,7 @@ class Event:
         sql = "update tb_event set event_name=%s, event_date=%s, event_location=%s where pk_event_id=%d"
         cursor.execute(sql, (self.event_name, self.event_date, self.event_location, self.pk_event_id))
         res = db.commit()
-        Database.close(cursor)
+        Database.close()
         if res == 0:
             raise Exception("Update fail")
 

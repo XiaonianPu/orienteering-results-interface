@@ -1,5 +1,5 @@
 import time
-from Basic.main import DB_INSTANCE
+from Basic.InCompetition import DB_INSTANCE
 
 class Entry:
     def __init__(self, user_id, club_id, event_id, competition_id, class_id, pk_entry_id=None) -> None:

@@ -1,8 +1,6 @@
-# from Network import Database
 import time
 import xml.etree.ElementTree as ET
-from os import environ
-import pymysql
+from Network import Database
 
 
 class Course:
@@ -25,7 +23,7 @@ class Course:
         sql = "insert into tb_course values(%s,%s,%s,%s,%s,%s)"
         cursor.execute(sql, (self.pk_course_id, self.course_title, self.course_length, self.course_type, self.course_climb, self.class_id))
         res = db.commit()
-        Database.close(cursor)
+        Database.close()
         if res == 0:
             raise Exception("Create fail")
 
@@ -34,7 +32,7 @@ class Course:
         sql = "update tb_event set event_name=%s, event_date=%s, event_location=%s where pk_event_id=%d"
         cursor.execute(sql, (self.event_name, self.event_date, self.event_location, self.pk_event_id))
         res = db.commit()
-        Database.close(cursor)
+        Database.close()
         if res == 0:
             raise Exception("Update fail")
 
@@ -48,7 +46,7 @@ class Course:
             sql = "select * from tb_event where pk_event_id=(%d)"
             cursor.execute(sql, pk_event_id)
         res = cursor.fetchall()
-        Database.close(cursor)
+        Database.close()
         if res is not None:
             res_list = []
             for row in res:

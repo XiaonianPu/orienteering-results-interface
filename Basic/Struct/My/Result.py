@@ -1,11 +1,14 @@
 import time
 from Basic.ResultStatistic.Interface.PunchMeta import PunchMeta
 # from Network import Database
+from Network import Database
+from Struct.OEvent.Punch import Punch
 
 
 class Result:
     def __init__(self, punch_meta: PunchMeta, entry_id=None, valid=None) -> None:
         super().__init__()
+        # 也叫readout_id
         self.pk_result_id = int(time.time())
         self.entry_id = entry_id
         self.start_time = punch_meta.start_time
@@ -21,4 +24,3 @@ class Result:
         self.course_match_confidence = 0.0
         self.correct_punch_list = []
         self.all_punch_list = []
-
