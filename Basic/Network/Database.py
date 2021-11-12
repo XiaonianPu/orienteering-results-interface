@@ -7,7 +7,7 @@ IS_FIREBIRD=True
 
 DB = None
 # if environ["DB_REMOTE"] == 1:
-if True:
+if False:
     if environ["DB_TYPE"] == "MYSQL":
         DB = pymysql.connect(user=environ["DB_USER"], password=environ["DB_PASSWORD"], host=environ["DB_HOST"],
                              database=environ["DB_DATABASE"])

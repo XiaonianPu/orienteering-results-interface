@@ -11,7 +11,7 @@ END_OF_LINE = "\r\n"
 
 def print_line(str_in) -> str:
     res = str_in + END_OF_LINE
-    print(res)
+    print(str_in)
     return res
 
 

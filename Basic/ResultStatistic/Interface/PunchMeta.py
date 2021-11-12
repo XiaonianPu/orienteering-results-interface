@@ -1,7 +1,7 @@
 import binascii
 from datetime import time
 
-from Util.TimeUtil import get_delta_time, time_shift
+from Util.TimeUtil import get_delta_time, time_shift, get_time_in_int
 
 OPERATION_LENGTH = 2
 TIME_LENGTH = 8
@@ -81,7 +81,8 @@ class PunchMeta:
                 previous_punch_time = punch_time
                 #  累积时间是与起点的时间差
                 cumulate_time = get_delta_time(punch_time, self.start_time)
-                self.last_to_finish = get_delta_time(self.finish_time, punch_time)
+                if get_time_in_int(self.finish_time) > 0:
+                    self.last_to_finish = get_delta_time(self.finish_time, punch_time)
                 self.punch_list.append(
                     {"punch_id":punch_id,
                      "cumulate_time":cumulate_time,
