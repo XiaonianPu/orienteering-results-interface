@@ -1,11 +1,13 @@
 import os
 import sys
-from SerialThread import SerialThread
-from serial.tools import list_ports
-
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 PACKAGE_DIR = SCRIPT_DIR + '/..'
 sys.path.append(PACKAGE_DIR)
+
+from SerialThread import SerialThread
+from serial.tools import list_ports
+
+
 
 if __name__ == "__main__":
     port_list = list_ports.comports()
