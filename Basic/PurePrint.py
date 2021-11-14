@@ -13,8 +13,8 @@ if __name__ == "__main__":
     port_list = list_ports.comports()
     print("Available port:")
     for index, port in enumerate(port_list):
-        print("[{0}] {1} - {2}".format(index+1, port.name, port.description))
-    station = input("Input Station COM name:")
-    printer = input("Input Printer COM name:")
-    thread1 = SerialThread(station, printer)
+        print("[{0}] {1} - {2}".format(index, port.name, port.description))
+    station = input("Input Station COM index:")
+    printer = input("Input Printer COM index:")
+    thread1 = SerialThread(port_list[station].device, port_list[printer].device)
     thread1.start()
